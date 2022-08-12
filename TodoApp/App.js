@@ -1,17 +1,18 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import DateHead from './component/DateHead';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 function App() {
   const today = new Date();
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, backgroundColor: '#bd1111'}}>
+    <SafeAreaProvider>
+      <SafeAreaView edges={['bottom']}>
         <DateHead date={today} />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
-const style = StyleSheet.create({});
+const styles = StyleSheet.create({});
 export default App;
