@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function DateHead({date}) {
+function DateHead({ date }) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
   // const formatted = `${year}년 ${month}월 ${day}일`;
 
-  const {top} = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
 
   return (
     <>
@@ -25,15 +25,15 @@ function DateHead({date}) {
 
 const styles = StyleSheet.create({
   statusBarPlaceholder: {
-    backgroundColor : '#eceff1'
+    backgroundColor: '#eceff1',
   },
   block: {
     padding: 16,
-    backgroundColor: "#eceff1",
+    backgroundColor: '#eceff1',
   },
   dateText: {
     fontSize: 24,
-    color: "black",
+    color: 'black',
   },
 });
 
