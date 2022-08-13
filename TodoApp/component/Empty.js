@@ -1,10 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 function Empty() {
   return (
     <View style={styles.block}>
-      <Text style={styles.description}>야호! 할 일이 없습니다</Text>
+      <Image
+        source={require("../assets/images/young_and_happy.png")}
+        // source={{uri:'https://via.placeholder.com/150'}}
+        style={styles.image}
+        resizeMode="contain"
+      />
+      <Text style={styles.description}>할 일이 없습니다</Text>
     </View>
   );
 }
@@ -12,12 +18,17 @@ function Empty() {
 const styles = StyleSheet.create({
   block: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   description: {
     fontSize: 24,
-    color: '#9e9e9e',
+    color: "#9e9e9e",
+  },
+  image: {
+    width: 240,
+    height: 179,
+    marginBottom: 16,
   },
 });
 
