@@ -31,13 +31,15 @@ function AddTodo() {
         style={styles.input}
         value={text}
         onChangeText={setText}
+        onSubmitEditing={onPress}
+        returnKeyType='done'
       />
       {Platform.select({
-          ios: <TouchableOpacity activeOpacity={0.5} onPress={onPress}>{button}</TouchableOpacity>,
-          android: <View style={styles.circleWrapper}>
-            <TouchableNativeFeedback onPress={onPress}>{button}</TouchableNativeFeedback>
-          </View>,
-        })}
+        ios: <TouchableOpacity activeOpacity={0.5} onPress={onPress}>{button}</TouchableOpacity>,
+        android: <View style={styles.circleWrapper}>
+          <TouchableNativeFeedback onPress={onPress}>{button}</TouchableNativeFeedback>
+        </View>,
+      })}
     </View>
   );
 }
