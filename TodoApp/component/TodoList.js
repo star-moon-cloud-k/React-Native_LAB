@@ -5,10 +5,11 @@ import TodoItem from "./TodoItem";
 function TodoList({ todos }) {
   return (
     <FlatList
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
       style={styles.list}
       data={todos}
       renderItem={({ item }) => (
-        <TodoItem id={item.id} text={item.text} done={item.done}/>
+        <TodoItem id={item.id} text={item.text} done={item.done} />
       )}
       keyExtractor={item => item.id.toString()}
     />
@@ -18,7 +19,11 @@ function TodoList({ todos }) {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+  }, separator: {
+    backgroundColor: "#e0e0e0",
+    height: 1,
   },
+
 });
 
 export default TodoList;
