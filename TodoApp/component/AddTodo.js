@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Image ,TouchableOpacity} from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Platform, TouchableNativeFeedback,
+} from "react-native";
 
 function AddTodo() {
   const [text, setText] = useState("");
@@ -12,11 +19,20 @@ function AddTodo() {
         value={text}
         onChangeText={setText}
       />
-      <View style={styles.buttonStyle}>
-        <Image source={require("../assets/icons/add_white/add_white.png")} />
-      </View>
+      {Platform.OS === "ios" ? (
+        <TouchableOpacity activeOpacity={0.5}>
+          <View style={styles.buttonStyle}>
+            <Image source={require("../assets/icons/add_white/add_white.png")} />
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableNativeFeedback>
+          <View style={styles.buttonStyle}>
+            <Image source={require("../assets/icons/add_white/add_white.png")} />
+          </View>
+        </TouchableNativeFeedback>
+      )}
     </View>
-
   );
 }
 
@@ -32,7 +48,7 @@ const styles = StyleSheet.create({
 
   },
   input: {
-    flex : 1,
+    flex: 1,
     fontSize: 16,
     paddingVertical: 8,
   },
