@@ -5,12 +5,25 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Platform, TouchableNativeFeedback,
+  Platform,
+  TouchableNativeFeedback,
+  Keyboard,
 } from "react-native";
 
 function AddTodo() {
   const [text, setText] = useState("");
-  console.log(text);
+
+  const onPress = () => {
+    setText('');
+    Keyboard.dismiss();
+  };
+
+  const button = (
+    <View style={styles.buttonStyle}>
+      <Image source={require("../assets/icons/add_white/add_white.png")} />
+    </View>
+  );
+
   return (
     <View style={styles.block}>
       <TextInput
@@ -19,19 +32,12 @@ function AddTodo() {
         value={text}
         onChangeText={setText}
       />
-      {Platform.OS === "ios" ? (
-        <TouchableOpacity activeOpacity={0.5}>
-          <View style={styles.buttonStyle}>
-            <Image source={require("../assets/icons/add_white/add_white.png")} />
-          </View>
-        </TouchableOpacity>
-      ) : (
-        <TouchableNativeFeedback>
-          <View style={styles.buttonStyle}>
-            <Image source={require("../assets/icons/add_white/add_white.png")} />
-          </View>
-        </TouchableNativeFeedback>
-      )}
+      {Platform.select({
+          ios: <TouchableOpacity activeOpacity={0.5} onPress={onPress}>{button}</TouchableOpacity>,
+          android: <View style={styles.circleWrapper}>
+            <TouchableNativeFeedback onPress={onPress}>{button}</TouchableNativeFeedback>
+          </View>,
+        })}
     </View>
   );
 }
@@ -59,7 +65,11 @@ const styles = StyleSheet.create({
     height: 48,
     backgroundColor: "#26a69a",
     borderRadius: 24,
+  }, circleWrapper: {
+    overflow: "hidden",
+    borderRadius: 24,
   },
+
 });
 
 export default AddTodo;
