@@ -5,36 +5,27 @@
  * @format
  */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, Text, View, Button } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import Box from './component/Box';
 
 import Greeting from './component/Greeting';
 
 const App = () => {
-  const name = 'JSX'
+  const [visible, setVisible] = useState(true);
+  const onPress = () => {
+    setVisible(!visible);
+  };
+  const name = 'JSX';
   return (
-    <SafeAreaView> 
+    <SafeAreaView>
       <View>
+        <Button title="토글" onPress={onPress} />
         <Text>React!!!</Text>
         <Greeting name={name} />
-        <Box/>
+        {/* {visible ? <Box rounded={true} size="large" color="skyblue" /> : null} */}
+        {visible && <Box rounded={true} size="large" color="skyblue" />}
       </View>
     </SafeAreaView>
   );
