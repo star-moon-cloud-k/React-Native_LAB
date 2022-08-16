@@ -6,20 +6,22 @@
  */
 
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, Button } from 'react-native';
-
+import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Box from './component/Box';
-
+import Counter from './component/Counter';
 import Greeting from './component/Greeting';
 
 const App = () => {
   const [visible, setVisible] = useState(true);
+
   const onPress = () => {
     setVisible(!visible);
   };
   const name = 'JSX';
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.full}>
+      <Counter />
       <View>
         <Button title="토글" onPress={onPress} />
         <Text>React!!!</Text>
@@ -30,4 +32,10 @@ const App = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  full: {
+    flex: 1,
+  },  
+});
 export default App;
