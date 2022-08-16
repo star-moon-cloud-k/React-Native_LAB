@@ -24,11 +24,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Greeting from './component/Greeting';
+
 const App = () => {
   return (
     <SafeAreaView>
       <View>
         <Text>React!!!</Text>
+        <Greeting />
       </View>
     </SafeAreaView>
   );
