@@ -13,7 +13,13 @@ import Greeting from './component/Greeting';
 
 const App = () => {
   const [visible, setVisible] = useState(true);
-
+  const [count, setCount] = useState(0);
+  const onIncrease = () => {
+    setCount(count + 1);
+  };
+  const onDecrease = () => {
+    setCount(count - 1);
+  };
   const onPress = () => {
     setVisible(!visible);
   };
@@ -21,7 +27,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.full}>
-      <Counter />
+      <Counter count={count} onIncrease={onIncrease} onDecrease={onDecrease} />
       <View>
         <Button title="토글" onPress={onPress} />
         <Text>React!!!</Text>
@@ -36,6 +42,6 @@ const App = () => {
 const styles = StyleSheet.create({
   full: {
     flex: 1,
-  },  
+  },
 });
 export default App;
