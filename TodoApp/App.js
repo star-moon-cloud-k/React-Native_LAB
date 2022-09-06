@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
 import DateHead from './components/DateHead';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import AddTodo from './components/AddTodo';
 import Empty from './components/Empty';
 import TodoList from './components/TodoList';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function App() {
   const today = new Date();
@@ -14,6 +15,34 @@ function App() {
     {id: 2, text: '리액트 네이티브', done: true},
     {id: 3, text: 'todolist', done: true},
   ]);
+
+  //불러오기
+  useEffect(() => {
+    async function load() {
+      try {
+        console.log(todos);
+        const rawTodos = await AsyncStorage.getItem('todos');
+        const saveTodos = JSON.parse(rawTodos);
+        setTodos(saveTodos);
+      } catch (e) {
+        console.log('Failed to load todos');
+      }
+    }
+    load();
+  }, []);
+
+  //저장
+  useEffect(() => {
+    console.log(todos);
+    async function save() {
+      try {
+        await AsyncStorage.setItem('todos', JSON.stringify(todos));
+      } catch (e) {
+        console.log('Failed to save todos');
+      }
+    }
+    save();
+  }, [todos]);
 
   const onInsert = text => {
     //새로 등록할 항목의 id를 구합니다.
@@ -36,6 +65,10 @@ function App() {
     setTodos(nextTodos);
   };
 
+  const onRemove = id => {
+    const nextTodos = todos.filter(todo => todo.id !== id);
+    setTodos(nextTodos);
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView edges={['bottom']} style={styles.block}>
@@ -47,7 +80,7 @@ function App() {
           {todos.length === 0 ? (
             <Empty />
           ) : (
-            <TodoList todos={todos} onToggle={onToggle} />
+            <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
           )}
           <AddTodo onInsert={onInsert} />
         </KeyboardAvoidingView>
